@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kamil Shah - CV</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .cv-container {
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: #ffffff;
+            display: flex;
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .cv-container.expanded {
+            max-width: 1200px;
+        }
+
+        .cv-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00d4aa, #00b4d8, #0077b6, #023e8a);
+            z-index: 10;
+        }
+
+        .sidebar {
+            width: 38%;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+            color: white;
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cv-container.expanded .sidebar {
+            width: 28%;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .main-content {
+            width: 62%;
+            padding: 40px 36px;
+            background: #ffffff;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .cv-container.expanded .main-content {
+            width: 72%;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .title {
+            font-size: 12px;
+            text-align: center;
+            margin-bottom: 32px;
+            opacity: 0.85;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.4;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #0f172a;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            border-radius: 2px;
+        }
+
+        .sidebar .section-title {
+            color: white;
+            font-size: 14px;
+        }
+
+        .sidebar .section-title::after {
+            background: linear-gradient(90deg, #60a5fa, #34d399);
+        }
+
+        .contact-info {
+            margin-bottom: 32px;
+        }
+
+        .contact-item {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            word-break: break-all;
+            min-height: 40px;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .contact-icon {
+            width: 20px;
+            margin-right: 10px;
+            text-align: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .contact-text {
+            font-size: 12px;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .skills-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .skills-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding: 8px 16px 8px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            border-left: 3px solid #60a5fa;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skills-list li:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+
+        .skills-list li::before {
+            content: "→";
+            position: absolute;
+            left: 8px;
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        .education-item {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .degree {
+            font-weight: 600;
+            font-size: 14px;
+            color: #60a5fa;
+            margin-bottom: 4px;
+        }
+
+        .university {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 2px;
+        }
+
+        .year {
+            font-size: 11px;
+            opacity: 0.7;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .portfolio-links a {
+            color: #60a5fa;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .portfolio-links a:hover {
+            background: rgba(96, 165, 250, 0.1);
+            transform: translateY(-1px);
+            border-color: #60a5fa;
+        }
+
+        .summary {
+            margin-bottom: 36px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #374151;
+            padding: 24px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            position: relative;
+        }
+
+        .summary::before {
+            content: '"';
+            font-size: 48px;
+            color: #3b82f6;
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 16px;
+            font-family: Georgia, serif;
+        }
+
+        .experience-item {
+            margin-bottom: 32px;
+            padding: 24px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border-radius: 2px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .job-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+            letter-spacing: -0.01em;
+        }
+
+        .company {
+            font-size: 15px;
+            color: #3b82f6;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .duration {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 500;
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .job-description {
+            margin-top: 16px;
+            color: #475569;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        .achievements {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .achievements li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 24px;
+            color: #374151;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .achievements li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-size: 12px;
+            top: 2px;
+        }
+
+        .achievements li:hover {
+            color: #1f2937;
+        }
+
+        /* Cold Email Samples Section */
+        .email-samples-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .email-samples-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .email-samples-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .email-samples-overlay.active .email-samples-container {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .email-samples-header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .email-samples-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .email-samples-header p {
+            font-size: 14px;
+            opacity: 0.85;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .email-samples-content {
+            padding: 30px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .email-intro {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .email-intro::before {
+            content: '"';
+            font-size: 36px;
+            color: #3b82f6;
+            opacity: 0.2;
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            font-family: Georgia, serif;
+        }
+
+        .email-intro p {
+            font-size: 14px;
+            color: #374151;
+            line-height: 1.7;
+        }
+
+        .email-sample {
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .email-sample::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+        }
+
+        .email-sample-header {
+            background: #f8fafc;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .email-sample-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .email-sample-meta {
+            font-size: 12px;
+            color: #64748b;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .email-sample-body {
+            padding: 20px;
+        }
+
+        .email-subject {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .email-subject strong {
+            color: #92400e;
+            font-size: 13px;
+        }
+
+        .email-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #374151;
+            white-space: pre-line;
+        }
+
+        .email-content strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .experience-item {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .experience-item:nth-child(1) { animation-delay: 0.1s; }
+        .experience-item:nth-child(2) { animation-delay: 0.2s; }
+        .experience-item:nth-child(3) { animation-delay: 0.3s; }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .cv-container {
+                margin: 0;
+                box-shadow: none;
+                max-width: none;
+                width: 100%;
+                border-radius: 0;
+            }
+            .experience-item:hover,
+            .contact-item:hover,
+            .skills-list li:hover {
+                transform: none;
+            }
+            .email-samples-overlay {
+                display: none;
+            }
+        }
+
+        /* Responsive adjustments for mobile and small tablets */
+        @media (max-width: 900px) {
+            .cv-container {
+                flex-direction: column;
+                max-width: 900px;
+                min-height: auto;
+                margin: 12px;
+                border-radius: 12px;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 20px;
+                align-items: flex-start;
+            }
+
+            .main-content {
+                width: 100%;
+                padding: 20px;
+            }
+
+            .name {
+                font-size: 22px;
+                text-align: left;
+            }
+
+            .title {
+                font-size: 11px;
+                text-align: left;
+                margin-bottom: 20px;
+            }
+
+            .section-title {
+                font-size: 14px;
+                margin-bottom: 16px;
+            }
+
+            .section-title::after {
+                bottom: -6px;
+                height: 2px;
+                width: 32px;
+            }
+
+            .contact-item {
+                padding: 10px;
+                font-size: 14px;
+                min-height: 44px;
+            }
+
+            .contact-icon {
+                font-size: 16px;
+                width: 26px;
+            }
+
+            .contact-text {
+                font-size: 14px;
+            }
+
+            .skills-list li {
+                font-size: 13px;
+                padding: 8px 14px 8px 28px;
+            }
+
+            .education-item {
+                padding: 12px;
+            }
+
+            .summary {
+                padding: 18px;
+                font-size: 14px;
+            }
+
+            .experience-item {
+                padding: 16px;
+            }
+
+            .job-title {
+                font-size: 16px;
+            }
+
+            .company {
+                font-size: 14px;
+            }
+
+            .duration {
+                font-size: 12px;
+                padding: 3px 10px;
+            }
+
+            .email-samples-container {
+                width: 95%;
+                max-width: 800px;
+                max-height: 90vh;
+                border-radius: 12px;
+            }
+
+            .email-samples-header {
+                padding: 20px;
+            }
+
+            .email-samples-header h2 {
+                font-size: 22px;
+            }
+
+            .close-button {
+                top: 12px;
+                right: 12px;
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+
+            .email-samples-content {
+                padding: 18px;
+                max-height: 60vh;
+            }
+
+            .email-subject {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .email-content {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .cv-container {
+                margin: 8px;
+                border-radius: 10px;
+            }
+
+            .sidebar {
+                padding: 16px;
+            }
+
+            .main-content {
+                padding: 16px;
+            }
+
+            .name {
+                font-size: 20px;
+            }
+
+            .title {
+                font-size: 10px;
+                margin-bottom: 14px;
+            }
+
+            .contact-item {
+                padding: 10px;
+                min-height: 44px;
+            }
+
+            .skills-list li {
+                font-size: 12px;
+                padding: 6px 12px 6px 26px;
+            }
+
+            .experience-item {
+                padding: 12px;
+            }
+
+            .email-samples-container {
+                width: 97%;
+                max-width: 680px;
+            }
+
+            .email-samples-header h2 {
+                font-size: 20px;
+            }
+
+            .email-samples-content {
+                padding: 14px;
+                max-height: 70vh;
+            }
+
+            .email-sample-body {
+                padding: 12px;
+            }
+        }
+
+        /* Make links and buttons more touch friendly on small screens */
+        @media (hover: none) {
+            .contact-item:hover,
+            .skills-list li:hover,
+            .experience-item:hover,
+            .portfolio-links a:hover {
+                transform: none;
+                background: rgba(255, 255, 255, 0.06);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="cv-container" id="cvContainer">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="name">Kamil Shah</div>
+            <div class="title">Cold Email Copywriter • Graphic Designer • Creative Writer</div>
+
+            <div class="section-title">Contact</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span class="contact-text">kamilshah360@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📱</span>
+                    <span class="contact-text">+923202756651</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span class="contact-text">Hyderabad, Sindh, PK</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">💼</span>
+                    <span class="contact-text">@sultanshah360</span>
+                </div>
+            </div>
+
+            <div class="section-title">Core Skills</div>
+            <ul class="skills-list">
+                <li>Cold Email Copywriting</li>
+                <li>Graphic Design</li>
+                <li>Content Creation & Research</li>
+                <li>Creative Writing</li>
+                <li>Adobe Photoshop</li>
+                <li>Adobe Illustrator</li>
+                <li>Canva Pro</li>
+                <li>B2B Lead Generation</li>
+                <li>Email Campaign Strategy</li>
+            </ul>
+
+            <div class="section-title">Technical Skills</div>
+            <ul class="skills-list">
+                <li>Google Workspace</li>
+                <li>Social Media Platforms</li>
+                <li>Content Management</li>
+                <li>Brand Identity Design</li>
+                <li>Digital & Print Media</li>
+                <li>Strong Communication</li>
+            </ul>
+
+            <div class="section-title">Education</div>
+            <div class="education-item">
+                <div class="degree">Intermediate, Computer Science</div>
+                <div class="university">Fazaia College, PAF Base Masroor</div>
+                <div class="year">2017 - 2019</div>
+            </div>
+            <div class="education-item">
+                <div class="degree">Matriculation, Computer Science</div>
+                <div class="university">SM Public School</div>
+                <div class="year">2015 - 2017</div>
+            </div>
+
+            <div class="section-title">Languages</div>
+            <ul class="skills-list">
+                <li>English - Fluent</li>
+                <li>Urdu - Native</li>
+            </ul>
+
+            <div class="section-title">Portfolio</div>
+            <div class="portfolio-links">
+                <a href="https://www.behance.net/kamilshah2001" target="_blank" rel="noopener">Behance Portfolio</a>
+                <a href="javascript:void(0)" onclick="showEmailSamples()">Cold Email Samples</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="section-title">Professional Summary</div>
+            <div class="summary">
+                Highly motivated creative professional with expertise in cold email copywriting, graphic design, and content creation. Fluent in both creativity and strategy, with a proven track record of producing compelling visual and written content that drives engagement and results. Experienced in healthcare technology messaging, brand development, and multi-platform content strategies.
+            </div>
+
+            <div class="section-title">Professional Experience</div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Graphic Designer | Writer</div>
+                        <div class="company">Trilops, LLC</div>
+                    </div>
+                    <div class="duration">March 2024 - Present</div>
+                </div>
+                <div class="job-description">
+                    Create visually appealing designs for digital and print media while producing high-quality written content including cold email campaigns for healthcare technology clients.
+                </div>
+                <ul class="achievements">
+                    <li>Created visually appealing designs for digital and print media, ensuring alignment with brand identity and goals</li>
+                    <li>Produced high-quality written content for blogs, social media, and websites, tailored to target audiences</li>
+                    <li>Developed specialized cold email campaigns for healthcare technology solutions targeting hospital CIOs and clinic operations</li>
+                    <li>Integrated EMR workflow solutions into email messaging, resulting in improved client adoption rates</li>
+                    <li>Maintained brand consistency across all visual and written communications</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Content Researcher | Creative Writer</div>
+                        <div class="company">Elderberry Media</div>
+                    </div>
+                    <div class="duration">September 2023 - March 2024</div>
+                </div>
+                <div class="job-description">
+                    Led content strategy and creative development for social media platforms, focusing on engaging and shareable content across multiple channels.
+                </div>
+                <ul class="achievements">
+                    <li>Conceptualized, produced, and managed a successful Snapchat show</li>
+                    <li>Produced compelling and shareable TikTok content to improve brand personality and engagement</li>
+                    <li>Conducted comprehensive content research to identify trending topics and audience preferences</li>
+                    <li>Developed creative writing strategies that increased social media engagement</li>
+                    <li>Collaborated with cross-functional teams to ensure content alignment with brand objectives</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Student Brand Ambassador</div>
+                        <div class="company">NFLP-Y by State Bank of Pakistan</div>
+                    </div>
+                    <div class="duration">June 2022 - October 2022</div>
+                </div>
+                <div class="job-description">
+                    4-month virtual internship focused on youth engagement and financial education outreach strategies.
+                </div>
+                <ul class="achievements">
+                    <li>Implemented outreach strategies to effectively engage youth audiences</li>
+                    <li>Generated interest in financial education initiatives through targeted campaigns</li>
+                    <li>Developed communication materials for diverse youth demographics</li>
+                    <li>Collaborated with team members to execute successful awareness programs</li>
+                    <li>Gained experience in financial sector marketing and public outreach</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cold Email Samples Overlay -->
+    <div class="email-samples-overlay" id="emailSamplesOverlay" onclick="hideEmailSamples(event)">
+        <div class="email-samples-container" onclick="event.stopPropagation()">
+            <div class="email-samples-header">
+                <button class="close-button" onclick="hideEmailSamples()">×</button>
+                <h2>Cold Email Samples</h2>
+                <p>Healthcare Technology • B2B Outreach • Conversion-Focused</p>
+            </div>
+
+            <div class="email-samples-content">
+                <div class="email-intro">
+                    <p>These cold email samples showcase targeted outreach strategies for healthcare technology solutions. Each email is crafted to address specific pain points and demonstrate value proposition within the first few lines, resulting in higher open rates and engagement.</p>
+                </div>
+
+                <div class="email-sample">
+                    <div class="email-sample-header">
+                        <div class="email-sample-title">Hospital CIO - Telemedicine Adoption</div>
+                        <div class="email-sample-meta">Target: Hospital Decision Makers • Industry: Healthcare IT</div>
+                    </div>
+                    <div class="email-sample-body">
+                        <div class="email-subject">
+                            <strong>Subject:</strong> Quick idea for {{Hospital}}'s telehealth
+                        </div>
+                        <div class="email-content">Hi Patricia,
+
+I saw {{hospital}} has been scaling telehealth. A lot of hospitals I talk to run into adoption plateaus until they tweak workflows around what doctors and patients actually use.
+
+At Trilops, we've helped teams lift adoption by <span class="highlight">about 30%</span> by plugging scheduling into their EMR, simplifying the visit flow, and making rollout painless on the IT side.
+
+If you tell me which EMR you're on, I can send a short deck with a couple of relevant tweaks. Worth it?
+
+Best,
+<strong>Kamil Shah</strong>
+Trilops</div>
+                    </div>
+                </div>
+
+                <div class="email-sample">
+                    <div class="email-sample-header">
+                        <div class="email-sample-title">Clinic Operations Director - Claims Processing</div>
+                        <div class="email-sample-meta">Target: Operations Management • Focus: Process Optimization</div>
+                    </div>
+                    <div class="email-sample-body">
+                        <div class="email-subject">
+                            <strong>Subject:</strong> Fewer resubmits on claims?
+                        </div>
+                        <div class="email-content">Hi {{FirstName}},
+
+Claims usually eat up way more time than they should.
+
+We recently helped a clinic cut resubmits by <span class="highlight">25%</span> just by connecting patient intake forms with their claims system.
+
+I think the same could work for {{Company}}.
+
+Want me to put together a quick walkthrough showing how it might look in your setup?
+
+Thanks,
+<strong>Kamil Shah</strong>
+Trilops</div>
+                    </div>
+                </div>
+
+                <div class="email-sample">
+                    <div class="email-sample-header">
+                        <div class="email-sample-title">Healthcare IT Manager - Cloud Migration</div>
+                        <div class="email-sample-meta">Target: IT Management • Focus: Infrastructure Modernization</div>
+                    </div>
+                    <div class="email-sample-body">
+                        <div class="email-subject">
+                            <strong>Subject:</strong> Favorite Color is 'BLACK'?
+                        </div>
+                        <div class="email-content">Hi {{FirstName}},
+
+<span class="highlight">Move EMR to cloud without downtime!</span>
+
+Running EMRs on-prem is a lot of patching and chasing performance issues.
+
+We've moved clinics to cloud setups that run smoother, scale easier, and stay compliant without extra admin overhead.
+
+Happy to sketch a short roadmap for how {{Company}} could make the shift.
+
+Interested?
+
+By the way, my favorite color is 'Black'!
+
+Cheers,
+<strong>Kamil Shah</strong>
+Trilops</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showEmailSamples() {
+            document.getElementById('emailSamplesOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideEmailSamples(event) {
+            // If called with event (click on overlay) ensure it was the overlay itself
+            if (!event || event.target === document.getElementById('emailSamplesOverlay')) {
+                document.getElementById('emailSamplesOverlay').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            } else {
+                // allow direct calls (e.g., close button)
+                if (!event.target) {
+                    document.getElementById('emailSamplesOverlay').classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        }
+
+        // Close overlay with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                hideEmailSamples();
+            }
+        });
+
+        // Improve focus handling for accessibility on mobile
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    </script>
+</body>
+</html>
